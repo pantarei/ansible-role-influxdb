@@ -48,9 +48,9 @@
   ignore_errors: true
   tags: influxdb
 
-- name: systemctl start influxdb
+- name: systemctl start influxdb.service
   service:
-    name: "influxdb"
+    name: "influxdb.service"
     state: "started"
     enabled: true
   changed_when: false
