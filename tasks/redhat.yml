@@ -20,7 +20,6 @@
     state: "present"
   register: result
   until: result is succeeded
-  tags: influxdb
 
 - name: rpm --import
   rpm_key:
@@ -30,7 +29,6 @@
   loop: "{{ _rpm_key }}"
   register: result
   until: result is succeeded
-  tags: influxdb
 
 - name: yum-config-manager --add-repo
   yum_repository:
@@ -44,7 +42,6 @@
     gpgkey: "{{ item.gpgkey }}"
     state: "{{ item.state }}"
   loop: "{{ _yum_repository }}"
-  tags: influxdb
 
 - name: yum install
   yum:
@@ -55,4 +52,3 @@
   until: result is succeeded
   notify:
     - influxdb | systemctl restart influxdb.service
-  tags: influxdb
